@@ -1,11 +1,9 @@
 package chapter13;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.io.*;
+
+import java.util.*;
 
 public class ExceptionHandling {
 
@@ -18,7 +16,7 @@ public class ExceptionHandling {
         File file = new File("resources/nonexistent.txt");
         try{
             file.createNewFile();
-        }catch (Exception e){
+        }catch (FileNotFoundException e){
             System.out.println("Directory does not exist.");
             e.printStackTrace();
         }
@@ -38,7 +36,8 @@ public class ExceptionHandling {
                 double num = fileReader.nextDouble();
                 System.out.println(num);
             }
-        }catch(FileNotFoundException | InputMismatchException e){
+        }catch(FileNotFoundException e){
+             throw InputMismatchException;
             e.printStackTrace();
         }finally{
             fileReader.close();
@@ -53,7 +52,8 @@ public class ExceptionHandling {
                 double num = fileReader.nextDouble();
                 System.out.println(num);
             }
-        }catch(FileNotFoundException | InputMismatchException e){
+        }catch(FileNotFoundException){
+            throw InputMismatchException;
             e.printStackTrace();
         }
     }
